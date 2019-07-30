@@ -1,4 +1,6 @@
-spring:
-   data:
-      mongodb:
-         uri: mongodb://192.168.0.12:27017/test
+mongodb:
+   host: 192.168.0.12
+   port: 27017
+   database: test
+vault_mongodb_user: secret/mongodb_user
+vault_mongodb_password: secret/mongodb_password
