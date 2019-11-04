@@ -1,16 +1,12 @@
 package com.at.vagrantansiblevault.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
-import org.springframework.vault.core.VaultTemplate;
-import org.springframework.vault.support.VaultResponseSupport;
 
-import com.at.vagrantansiblevault.model.KeyValue;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
@@ -34,15 +30,16 @@ public class MongoConfig {
 	@Value("${vault_mongodb_password}")
 	private String secret_password;
 
-	@Autowired
-	private VaultTemplate template;
+//	@Autowired
+//	private VaultTemplate template;
 
 	@Bean
 	public MongoDbFactory mongoDbFactory() throws Exception {
-		VaultResponseSupport<KeyValue> user = template.read(secret_user, KeyValue.class);
-		VaultResponseSupport<KeyValue> password = template.read(secret_password, KeyValue.class);
-		MongoCredential credential = MongoCredential.createCredential(user.getData().getValue(), database,
-				password.getData().getValue().toCharArray());
+		// VaultResponseSupport<KeyValue> user = template.read(secret_user,
+		// KeyValue.class);
+		// VaultResponseSupport<KeyValue> password = template.read(secret_password,
+		// KeyValue.class);
+		MongoCredential credential = MongoCredential.createCredential("user", database, "password".toCharArray());
 		ServerAddress serverAddress = new ServerAddress(host, port);
 		MongoClientOptions options = MongoClientOptions.builder().build();
 
